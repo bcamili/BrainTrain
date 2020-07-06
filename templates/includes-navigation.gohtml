@@ -1,0 +1,73 @@
+{{define "navigation"}}
+
+  <header id="main-header">
+    <div class="logo">
+      <a href="/index">
+        <img src="/public/img/logo.svg">
+        <div id='logo'>
+          <p id='brain'>Brain</p>
+          <p id='train'>
+            Train
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <div class='login'>
+      <div class='hamMenu'>
+        <div class='hamMenuElement'></div>
+        <div class='hamMenuElement'></div>
+        <div class='hamMenuElement'></div>
+      </div>
+      <form action="/login" method="POST">
+        <div class='loginStuff'>
+          <div class='loginField'>
+            <input type="text" placeholder="Nutzername" name="username" required="required">
+          </div>
+          <div class='loginField'>
+            <input type="password" placeholder="Passwort" name="password" required="required">
+          </div>
+          <div class="logButt">
+            <button type="submit" class="yellowButton">Login</button>
+
+        </div>
+      </form>
+        <div class='register'>
+          <a href="/register">Registrieren</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="clr"></div>
+  <div class="page">
+    <navigation class="navi">
+      <div class="navCenter" id="navigationButtons">
+        <hr>
+        <a href="/index" type="button" class="navButton">
+          <div class="navIcon">
+            <img src="/public/img/Home.svg">
+          </div>
+          <div class="navLabel">
+            Home
+          </div>
+        </a>
+        <hr>
+        <a href="/cardbox" type="button" class="navButton">
+          <div class="navIcon">
+            <img src="/public/img/Karteikasten.svg">
+          </div>
+          <div class="navLabel">
+            Karteikasten
+          </div>
+          <div class="border">
+
+            <div class="greenCounter">
+              {{.MainInfo.BoxCount}}
+            </div>
+          </div>
+        </a>
+        <hr>
+      </div>
+    </navigation>
+    <main class="main">
+  {{end}}

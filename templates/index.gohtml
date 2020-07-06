@@ -1,0 +1,16 @@
+{{template "header" .}}
+
+{{if .IsLoggedIn}}
+{{template "navigation_loggedin" .}}
+{{else}}
+{{template "navigation" .}}
+{{end}}
+{{if .ErrorMsg.Error01}}
+  <div class="errorIndex">Passwort falsch!</div>
+{{end}}
+    <div class="boxContainer startPage">
+      <h1>Willkommen bei <font color="#27AE60" id="brain">Brain</font><font color="#2ECC71" id="train">Train</font>
+      </h1>
+      <h2>Hier haben sich <b>{{.MainInfo.UserCount}} Nutzer</b> angemeldet und <br> zusammen <b>{{.MainInfo.CardCount}} Lernkarten</b> in <b>{{.MainInfo.BoxCount}} Karteien</b> <br> erstellt.</h2>
+    </div>
+{{template "footer"}}

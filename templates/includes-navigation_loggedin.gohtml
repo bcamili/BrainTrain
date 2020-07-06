@@ -1,0 +1,85 @@
+{{define "navigation_loggedin"}}
+<header id="main-header">
+  <div class="logo">
+    <a href="/index">
+      <img src="/public/img/logo.svg">
+      <div id='logo'>
+        <p id='brain'>Brain</p>
+        <p id='train'> Train </p>
+      </div>
+    </a>
+  </div>
+
+  <div class='login'>
+    <div class='hamMenu'>
+      <div class='hamMenuElement'></div>
+      <div class='hamMenuElement'></div>
+      <div class='hamMenuElement'></div>
+    </div>
+    <div class='loginStuff'>
+      <a href="/new-card" class='yellowButton'>Neue Kartei</a>
+      <div class="nameAndLogout">
+        <p>{{.Userinfo.Username}}</p>
+        <a href="/logout">Logout</a>
+      </div>
+      <div class="profilePic">
+        <img src="/public/docs/{{.Userinfo.PicID}}">
+      </div>
+    </div>
+  </div>
+</header>
+<div class="clr"></div>
+<div class="page">
+  <navigation class="navi">
+    <div class="navCenter" id="navigationButtons">
+      <hr>
+      <a href="/index" type="button" class="navButton">
+        <div class="navIcon">
+          <img src="/public/img/Home.svg">
+        </div>
+        <div class="navLabel">
+          Home
+        </div>
+      </a>
+      <hr>
+      <a href="/cardbox" type="button" class="navButton">
+        <div class="navIcon">
+          <img src="/public/img/Karteikasten.svg">
+        </div>
+        <div class="navLabel">
+          Karteikasten
+        </div>
+        <div class="border">
+          <div class="greenCounter">
+            {{.MainInfo.BoxCount}}
+          </div>
+        </div>
+      </a>
+      <hr>
+      <a href="/mycards" type="button" class="navButton">
+        <div class="navIcon">
+          <img src="/public/img/Meine-Karteien.svg">
+        </div>
+        <div class="navLabel">
+          Meine Karteien
+        </div>
+        <div class="border">
+          <div class="greenCounter">
+            {{.MainInfo.UserBoxCount}}
+          </div>
+        </div>
+      </a>
+      <hr>
+      <a href="/my-profile" type="button" class="navButton" >
+        <div class="navIcon">
+          <img src="/public/img/Mein-Profil.svg">
+        </div>
+        <div class="navLabel">
+          Mein Profil
+        </div>
+      </a>
+      <hr>
+    </div>
+  </navigation>
+  <main class="main">
+{{end}}

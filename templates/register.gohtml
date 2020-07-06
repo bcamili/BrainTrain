@@ -1,0 +1,63 @@
+{{template "header" .}}
+
+{{template "navigation" .}}
+<div class="boxContainer regPage">
+  <p>Wir freuen uns, dass du dich bei BrainTrain anmelden möchtest. Bitte beachte, dass
+    <b>pro E-mail Adresse nur ein Nutzer</b>
+    erstellt werden kann und jeder
+    <b>Nutzername nur einmal vergeben</b>
+    wird.
+    <form action="/signup" method="POST" class="registerForm">
+      <div class="regCol">
+        <label for="userName">Nutzername</label>
+        <input type="text" placeholder="maxmustermann" name="username" required="required">
+        {{if .ErrorMsg.Error01}}
+          <div class="error">Dieser Nutzername ist bereits vergeben</div>
+          {{else}}
+          <div class="noError"></div>
+
+        {{end}}
+      </div>
+      <div class="regCol">
+        <label for="email">Email</label>
+        <input type="text" placeholder="muster@example.com" name="email" id="uname" required="required">
+        {{if .ErrorMsg.Error02}}
+          <div class="error">Diese Mail ist bereits vergeben!</div>
+          {{else}}
+          <div class="noError"></div>
+
+        {{end}}
+      </div>
+      <div class="regCol" id="pswd">
+        <label for="password">Passwort</label>
+        <input type="password" placeholder="" name="password" required="required">
+
+        <div class="blankSpace"></div>
+      </div>
+      <div class="regCol">
+        <label for="psw-repeat">Passwort wiederholen</label>
+        <input type="password" placeholder="" name="psw-repeat" required="required">
+        {{if .ErrorMsg.Error03}}
+          <div class="error">Die Passwörter stimmen nicht überein!</div>
+          {{else}}
+          <div class="noError"></div>
+
+        {{end}}      </div>
+      <div class="clr"></div>
+      <div class="regCol" style="display:flex" id="tos" required="required">
+        <input type="checkbox" name="tos" value="agreed">
+        <div class="tosAgree">Ich habe die nicht vorhandene Datenschutz-<br>erklärung zur Kenntnis genommen</div>
+        {{if .ErrorMsg.Error04}}
+          <div class="error">Bitte setzen Sie hier einen Haken!</div>
+          {{else}}
+          <div class="noError"></div>
+
+        {{end}}      </div>
+      <div class="regCol">
+        <button type="submit" id="regButt" class="yellowButton" onclick="showTheError()">Registrieren</button>
+        <div class="blankSpace"></div>
+      </div>
+    </form>
+  </div>
+
+  {{template "footer"}}

@@ -1,0 +1,189 @@
+{{if .Edit}}
+
+  {{template "header" .}}
+  {{template "navigation_loggedin" .}}
+  <div class="pageName">
+    Kartei erstellen / Kartei bearbeiten
+  </div>
+
+  <div class="pageDescriptionSearch">
+    <p>Hier kannst du eine neue Kartei erstellen oder eine vorhandene nach Bedarf bearbeiten.</p>
+  </div>
+  <div class="content">
+    <div class="details boxContainer">
+      <div class="detailContainer">
+        Name
+        <h1>{{.ActiveCardbox.Boxname}}</h1>
+      </div>
+      <div class="detailContainer">
+        Kategorie
+        <h1 style="display:flex">
+          {{.ActiveCardbox.Category}}
+          <div class="blackTriangleRight"></div>
+          {{.ActiveCardbox.Subcategory}}
+        </h1>
+      </div>
+      <div class="detailContainer">
+        Fortschritt
+        <h1>{{.ActiveCardbox.Progress}}%</h1>
+      </div>
+      <div>
+        <a href="/edit-info" class="yellowButton greenButton smallButton">Bearbeiten</a>
+      </div>
+      <div class="cardCount">
+        <div class="cardCountNumber">{{.ActiveCardbox.NumCards}}</div>
+        <div class="hardtext-cards">Karten</div>
+      </div>
+    </div>
+    <div class="cardsAndQA">
+      <div class="cardContainer">
+        {{range .ActiveCards}}
+        <a href="/edit-selected/{{.CardID}}">
+          <div class="card boxContainer" id="{{.Select}}">
+            <div style="margin:10px 0 0 10px">
+              #{{.Count}}
+
+                <h1 style="text-decoration:none;">{{.Title}}</h1>
+
+            </div>
+            <div class="smallButtonRow">
+              <div>
+                <a href="/edit-selected/{{.CardID}}" class="yellowButton greenButton smallButton">Bearbeiten</a>
+              </div>
+                <button class="yellowButton redButton smallButton" onclick="onCard(`{{.CardID}}`)"><img src="/public/img/Delete.svg"></button>
+            </div>
+          </div>
+          </a>
+
+          <div id="{{.CardID}}" class="overlay">
+            <div class="delBox">
+              <div class="pageName">
+                Löschen
+              </div>
+
+              <div class="pageDescriptionSearch">
+                <p>Bist du sicher, dass du diese Karte löschen möchtest?</p>
+              </div>
+              <div class="profupdateRow" id="keepOrDelete">
+                <a class="yellowButton greenButtonText" onclick="offCard(`{{.CardID}}`)">Karte behalten</a>
+                <a href="/delete-card/{{.CardID}}" class="yellowButton redButton" id="delete" method="GET">Karte löschen</a>
+              </div>
+            </div>
+          </div>
+
+        {{end}}
+        <a href="/create-card"><div id="newCard">Neue Karte</div></a>
+      </div>
+      <div class="QAarea boxContainer">
+        <form action="/save-card" method="post">
+          <div class="title">
+            <div class="leftCol">Titel</div>
+            <div class="newCardForm entryFields">
+              <input type="text" value="{{.ActiveCard.Title}}" name="cardTitle">
+            </div>
+          </div>
+          <div class="newCardContainer">
+            <div class="leftCol">Frage</div>
+            <div class="entryFields">
+              <textarea id="mde3" name="question">{{.ActiveCard.Question}}</textarea>
+            </div>
+          </div>
+          <div class="newCardContainer">
+            <div class="leftCol">Antwort</div>
+            <div class="entryFields">
+              <textarea id="mde4" name="answer">{{.ActiveCard.Answer}}</textarea>
+            </div>
+          </div>
+          <div class="buttonRow">
+            <input type="submit" class="yellowButton" value="Speichern">
+            <a href="/mycards" class="yellowButton redButtonText">Abbrechen</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {{template "footer"}}
+  {{else}}
+    {{template "header" .}}
+    {{template "navigation_loggedin" .}}
+    <div class="pageName">
+      Kartei erstellen / Kartei bearbeiten
+    </div>
+
+    <div class="pageDescriptionSearch">
+      <p>Hier kannst du eine neue Kartei erstellen oder eine vorhandene nach Bedarf bearbeiten.</p>
+    </div>
+    <div class="content">
+      <div class="details boxContainer">
+        <div class="detailContainer">
+          Name
+          <h1>{{.ActiveCardbox.Boxname}}</h1>
+        </div>
+        <div class="detailContainer">
+          Kategorie
+          <h1 style="display:flex">
+            {{.ActiveCardbox.Category}}
+            <div class="blackTriangleRight"></div>
+            {{.ActiveCardbox.Subcategory}}
+          </h1>
+        </div>
+        <div class="detailContainer">
+          Fortschritt
+          <h1>{{.ActiveCardbox.Progress}}%</h1>
+        </div>
+        <div>
+          <a href="" class="yellowButton greenButton smallButton">Bearbeiten</a>
+        </div>
+        <div class="cardCount">
+          <div class="cardCountNumber">{{.ActiveCardbox.NumCards}}</div>
+          <div class="hardtext-cards">Karten</div>
+        </div>
+      </div>
+      <div class="cardsAndQA">
+        <div class="cardContainer">
+          {{range .ActiveCards}}
+            <div class="card boxContainer" id="{{.Select}}">
+              <div style="margin:10px 0 0 10px">
+                #{{.Count}}
+                <h1>{{.Title}}</h1>
+              </div>
+              <div class="smallButtonRow">
+                <div>
+                  <a href="" class="yellowButton greenButton smallButton">Bearbeiten</a>
+                </div>
+                <div class="yellowButton redButton smallButton"><img src="/public/img/Delete.svg"></div>
+              </div>
+            </div>
+          {{end}}
+
+        </div>
+        <div class="QAarea boxContainer">
+          <form action="/submit-card" method="post">
+            <div class="title">
+              <div class="leftCol">Titel</div>
+              <div class="newCardForm entryFields">
+                <input type="text" placeholder="" name="cardTitle">
+              </div>
+            </div>
+            <div class="newCardContainer">
+              <div class="leftCol">Frage</div>
+              <div class="entryFields">
+                <textarea id="mde1" name="question"></textarea>
+              </div>
+            </div>
+            <div class="newCardContainer">
+              <div class="leftCol">Antwort</div>
+              <div class="entryFields">
+                <textarea id="mde2" name="answer"></textarea>
+              </div>
+            </div>
+            <div class="buttonRow">
+              <input type="submit" class="yellowButton" value="Speichern">
+              <a href="/mycards" class="yellowButton redButtonText">Abbrechen</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {{template "footer"}}
+    {{end}}

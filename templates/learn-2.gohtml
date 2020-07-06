@@ -1,0 +1,85 @@
+{{template "header" .}}
+
+{{template "navigation_loggedin" .}}
+<div class="pageName">
+  Lernen
+</div>
+
+<div class="pageDescriptionSearch">
+  <p>Hier wird dir zufällig eine Karte aus der gewählten Kartei angezeigt.</p>
+</div>
+<div class="content">
+  <div class="details boxContainer">
+    <div class="detailContainer">
+      Name
+      <h1>{{.ActiveCardbox.Boxname}}</h1>
+    </div>
+    <div class="detailContainer">
+      Kategorie
+      <h1 style="display:flex">
+        {{.ActiveCardbox.Category}}
+        <div class="blackTriangleRight"></div>
+        {{.ActiveCardbox.Subcategory}}
+      </h1>
+    </div>
+    <div class="detailContainer">
+      Fortschritt
+      <h1>{{.Levels.Progress}}%</h1>
+    </div>
+    <div>
+      <table class="repTable">
+        <tr>
+          <td>Wiederholung</td>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        <tr style="font-weight:bold;">
+          <td>Karten</td>
+          <td>{{.Levels.Lvl0}}</td>
+          <td>{{.Levels.Lvl1}}</td>
+          <td>{{.Levels.Lvl2}}</td>
+          <td>{{.Levels.Lvl3}}</td>
+          <td>{{.Levels.Lvl4}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="cardCount">
+      <div class="cardCountNumber">{{.ActiveCardbox.NumCards}}</div>
+      <div class="hardtext-cards">Karten</div>
+    </div>
+  </div>
+  <div class="cardsAndQA">
+    <div class="learnCard QAarea boxContainer ">
+      <div class="title">
+        <div class="leftCol">Titel</div>
+        <div class="cardTitle">{{.ActiveCard.Title}}</div>
+        <div class="levelMeter">
+          {{range .ActiveCard.Levelmeter}}
+            <div class="level" id="{{.LevelCode}}">
+              <p>{{.Level}}</p>
+            </div>
+          {{end}}
+        </div>
+      </div>
+      <div class="learnRow">
+        <div class="leftCol">Frage</div>
+        <div>{{.ActiveCard.QuestionHTML}}</div>
+      </div>
+      <div class="learnRow">
+        <div class="leftCol">Antwort</div>
+        <div>{{.ActiveCard.AnswerHTML}}</div>
+      </div>
+      <div class="rightWrong">
+        <a href="/correct">
+          <div class="yellowButton greenButtonText smallButton">Richtig</div>
+        </a>
+        <a href="/false">
+          <div class="yellowButton redButtonText smallButton">Falsch</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  {{template "footer"}}
