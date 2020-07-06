@@ -1,0 +1,176 @@
+{{if .IsLoggedIn}}
+
+  {{template "header" .}}
+
+  {{template "navigation_loggedin" .}}
+  <div class="pageName">
+    Kartei anschauen
+  </div>
+
+  <div class="pageDescriptionSearch">
+    <p>Hier kannst du dir eine beliebige Kartei anschauen, ohne Sie zu bearbeiten.</p>
+  </div>
+  <div class="content">
+    <div class="details boxContainer">
+      <div class="detailContainer">
+        Name
+        <h1>{{.ActiveCardbox.Boxname}}</h1>
+      </div>
+      <div class="detailContainer">
+        Kategorie
+        <h1 style="display:flex">
+          {{.ActiveCardbox.Category}}
+          <div class="blackTriangleRight"></div>
+          {{.ActiveCardbox.Subcategory}}
+        </h1>
+      </div>
+      <div class="detailContainer">
+        Erstellt von
+        <h1>{{.ActiveCardbox.Author}}</h1>
+      </div>
+      <div class="detailContainer">
+        Fortschritt
+        <h1>{{.ActiveCardbox.Progress}}%</h1>
+      </div>
+      <div class="cardCount">
+        <div class="cardCountNumber">{{.ActiveCardbox.NumCards}}</div>
+        <div class="hardtext-cards">Karten</div>
+      </div>
+    </div>
+    <div class="cardsAndQA">
+      {{if .ActiveCard.Title}}
+
+      <div class="cardContainer">
+
+        {{range .ActiveCards}}
+        <a href="/view/selected/{{.CardID}}">
+          <div class="card boxContainer" id="{{.Select}}">
+
+            <div style="margin:10px 0 0 10px">
+              #{{.Count}}
+                <h1>{{.Title}}</h1>
+
+            </div>
+          </div>
+          </a>
+        {{end}}
+
+      </div>
+      <div class="QAarea boxContainer">
+        <div class="title">
+          <div class="leftCol">Titel</div>
+          <div class="cardTitle">{{.ActiveCard.Title}}</div>
+          <div class="levelMeter">
+            {{range .ActiveCard.Levelmeter}}
+              <div class="level" id="{{.LevelCode}}">
+                <p>{{.Level}}</p>
+              </div>
+            {{end}}
+          </div>
+        </div>
+        <div class="QA">
+          <div class="leftCol">Frage</div>
+            <div>{{.ActiveCard.QuestionHTML}}</div>
+        </div>
+        <div class="QA">
+          <div class="leftCol">Antwort</div>
+            <div>{{.ActiveCard.AnswerHTML}}</div>
+        </div>
+      </div>
+      {{else}}
+      <div class="learnCard QAarea boxContainer ">
+        <div class="title" style="margin-top:100px;margin-left:170px;">
+          <div class="cardTitle">Momentan gibt es keine Karten in diesem Kasten.</div>
+        </div>
+        <div>
+          <a href="/cardbox"><div class="yellowButton smallButton" style="margin-right: 330px;margin-top: 30px;font-size: larger;">Zurück</div></a>
+        </div>
+
+      </div>
+      {{end}}
+    </div>
+    {{template "footer"}}
+
+  {{else}}
+
+    {{template "header" .}}
+
+    {{template "navigation" .}}
+    <div class="pageName">
+      Kartei anschauen
+    </div>
+
+    <div class="pageDescriptionSearch">
+      <p>Hier kannst du dir eine beliebige Kartei anschauen, ohne Sie zu bearbeiten.</p>
+    </div>
+    <div class="content">
+      <div class="details boxContainer">
+        <div class="detailContainer">
+          Name
+          <h1>{{.ActiveCardbox.Boxname}}</h1>
+        </div>
+        <div class="detailContainer">
+          Kategorie
+          <h1 style="display:flex">
+            {{.ActiveCardbox.Category}}
+            <div class="blackTriangleRight"></div>
+            {{.ActiveCardbox.Subcategory}}
+          </h1>
+        </div>
+        <div class="detailContainer">
+          Erstellt von
+          <h1>{{.ActiveCardbox.Author}}</h1>
+        </div>
+        <div class="cardCount">
+          <div class="cardCountNumber">{{.ActiveCardbox.NumCards}}</div>
+          <div class="hardtext-cards">Karten</div>
+        </div>
+      </div>
+      <div class="cardsAndQA">
+        {{if .ActiveCard.Title}}
+
+        <div class="cardContainer">
+
+          {{range .ActiveCards}}
+            <a href="/view/selected/{{.CardID}}">
+              <div class="card boxContainer" id="{{.Select}}">
+
+                <div style="margin:10px 0 0 10px">
+                  #{{.Count}}
+                  <h1>{{.Title}}</h1>
+                </div>
+
+              </div>
+            </a>
+          {{end}}
+
+        </div>
+        <div class="QAarea boxContainer">
+          <div class="title">
+            <div class="leftCol">Titel</div>
+            <div class="cardTitle">{{.ActiveCard.Title}}</div>
+          </div>
+          <div class="QA">
+            <div class="leftCol">Frage</div>
+              {{.ActiveCard.QuestionHTML}}
+          </div>
+          <div class="QA">
+            <div class="leftCol">Antwort</div>
+              {{.ActiveCard.AnswerHTML}}
+          </div>
+        </div>
+        {{else}}
+        <div class="learnCard QAarea boxContainer ">
+          <div class="title" style="margin-top:100px;margin-left:170px;">
+            <div class="cardTitle">Momentan gibt es keine Karten in diesem Kasten.</div>
+          </div>
+          <div>
+            <a href="/cardbox"><div class="yellowButton smallButton" style="margin-right: 330px;margin-top: 30px;font-size: larger;">Zurück</div></a>
+          </div>
+
+        </div>
+        {{end}}
+      </div>
+      {{template "footer"}}
+
+    {{end}}
