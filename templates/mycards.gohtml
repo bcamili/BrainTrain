@@ -1,0 +1,93 @@
+{{template "header" .}}
+
+{{template "navigation_loggedin" .}}
+
+<div class="pageName">
+  Meine Karteien
+</div>
+
+<div class="pageDescriptionSearch">
+  <p>Hier findest du deine Karteien sowie öffentliche Karteien, die du angefangen hast zu lernen.</p>
+  <div class="searchField">
+    <input type="search" placeholder="Suche" name="searchField">
+  </div>
+  <div class="sortField">
+    <form>
+      <select name="sortBy">
+        <option value="default">Sortieren nach...</option>
+        <option value="name">Name</option>
+        <option value="category">Kategorie</option>
+        <option value="progress">Forschritt</option>
+      </select>
+    </form>
+  </div>
+</div>
+<div class="content">
+  {{range .Categories}}
+  <div class="category">
+    <div class="catName">
+      {{.CategoryName}}
+    </div>
+
+    <div class="cardbox">
+    {{range .Boxes}}
+      <div class="cards">
+        <div class="subCat">
+          {{.Category}}
+          <div class="triangleRight"></div>
+          {{.Subcategory}}
+        </div>
+        <div class="titleAndCardCount">
+          <div class="stackTitle">
+            <a href="/view/{{.Id}}">{{.Boxname}}</a>
+          </div>
+          <div class="cardCount">
+            <div class="cardCountNumber">{{.NumCards}}</div>
+            <div class="hardtext-cards">Karten</div>
+          </div>
+        </div>
+        <div class="description">
+          {{.Description}}
+        </div>
+        <div class="detailContainer">
+          <div class="details">
+            <div class="attribute">Sichtbarkeit:</div>
+            {{.Visibility}}
+          </div>
+          <div class="details">
+            <div class="attribute">Fortschritt:</div>
+            {{.Progress}}%
+          </div>
+        </div>
+        <div class="buttonRow">
+          <a href="/learn/box/{{.Id}}" class="yellowButton smallButton">Lernen</a>
+          <a href = "/edit-box/{{.Id}}"><div class="yellowButton greenButton smallButton">Bearbeiten</div></a>
+          <button class="yellowButton redButton smallButton"  onclick="on(`{{.Id}}`)" ><img src="/public/img/Delete.svg" method="DELETE"></button>
+        </div>
+      </div>
+      <div id="{{.Id}}" class="overlay">
+        <div class="delBox">
+          <div class="pageName">
+            Löschen
+          </div>
+
+          <div class="pageDescriptionSearch">
+            <p>Bist du sicher, dass du diese Kartei löschen möchtest?</p>
+          </div>
+          <div class="profupdateRow" id="keepOrDelete">
+            <a class="yellowButton greenButtonText" onclick="off(`{{.Id}}`)">Kartei behalten</a>
+            <a href="/delete/{{.Id}}" class="yellowButton redButton" id="delete" method="GET">Kartei löschen</a>
+          </div>
+        </div>
+      </div>
+      {{else}}
+      <p> Leider keine Karteien vorhanden.</p>
+    {{end}}
+    </div>
+
+  </div>
+  {{end}}
+</div>
+
+
+{{template "footer"}}

@@ -1,0 +1,226 @@
+{{if .Edit}}
+{{template "header" .}}
+
+{{template "navigation_loggedin" .}}
+<div class="pageName">
+  Kartei erstellen / Kartei bearbeiten
+</div>
+
+<div class="pageDescriptionSearch">
+  <p>Hier kannst du eine neue Kartei erstellen oder eine vorhandene nach Bedarf bearbeiten.</p>
+</div>
+<div class="boxContainer miscData">
+  <div class="stdTitle">Allgemeine Daten</div>
+  <div class="newCardForm">
+    <form action="/save-cardbox" method="post">
+      <div class="newCardFormContainer">
+        <label for="cardTitle" class="miscDataLabel">Titel</label>
+        <div class="newCardForm">
+          <input type="text" placeholder="" name="cardTitle" value="{{.ActiveCardbox.Boxname}}">
+        </div>
+      </div>
+      <div class="newCardFormContainer">
+        <label for="category" class="miscDataLabel">Kategorie</label>
+        <div class="newCardForm DDArrow">
+          <select name="category" class="categoriesDD">
+            <option value="empty"></option>
+            <optgroup label="Naturwissenschaften">
+              <option value="Naturwissenschaften-Biologie">Biologie</option>
+              <option value="Naturwissenschaften-Chemie">Chemie</option>
+              <option value="Naturwissenschaften-Elektrotechnik">Elektrotechnik</option>
+              <option value="Naturwissenschaften-Informatik">Informatik</option>
+              <option value="Naturwissenschaften-Mathematik">Mathematik</option>
+              <option value="Naturwissenschaften-Medizin">Medizin</option>
+              <option value="Naturwissenschaften-Naturkunde">Naturkunde</option>
+              <option value="Naturwissenschaften-Physik">Physik</option>
+              <option value="Naturwissenschaften-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Sprachen">
+              <option value="Sprachen-Chinesisch">Chinesisch</option>
+              <option value="Sprachen-Deutsch">Deutsch</option>
+              <option value="Sprachen-Französisch">Französisch</option>
+              <option value="Sprachen-Griechisch">Griechisch</option>
+              <option value="Sprachen-Italienisch">Italienisch</option>
+              <option value="Sprachen-Latein">Latein</option>
+              <option value="Sprachen-Russisch">Russisch</option>
+              <option value="Sprachen-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Gesellschaft">
+              <option value="Gesellschaft-Ethik">Ethik</option>
+              <option value="Gesellschaft-eschichte">Geschichte</option>
+              <option value="Gesellschaft-Literatur">Literatur</option>
+              <option value="Gesellschaft-Musik">Musik</option>
+              <option value="Gesellschaft-Politik">Politik</option>
+              <option value="Gesellschaft-Recht">Recht</option>
+              <option value="Gesellschaft-Soziales">Soziales</option>
+              <option value="Gesellschaft-Sport">Sport</option>
+              <option value="Gesellschaft-Verkehrskunde">Verkehrskunde</option>
+              <option value="Gesellschaft-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Wirtschaft">
+              <option value="Wirtschaft-BWL">BWL</option>
+              <option value="Wirtschaft-Finanzen">Finanzen</option>
+              <option value="Wirtschaft-Landwirtschaft">Landwirtschaft</option>
+              <option value="Wirtschaft-Marketing">Marketing</option>
+              <option value="Wirtschaft-VWL">VWL</option>
+              <option value="Wirtschaft-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Geisteswissenschaften-">
+              <option value="Geisteswissenschaften-Kriminologie">Kriminologie</option>
+              <option value="Geisteswissenschaften-Philosophie">Philosophie</option>
+              <option value="Geisteswissenschaften-Psychologie">Psychologie</option>
+              <option value="Geisteswissenschaften-Pädagogik">Pädagogik</option>
+              <option value="Geisteswissenschaften-Theologie">Theologie</option>
+              <option value="Geisteswissenschaften-Sonstiges">Sonstiges</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="shortError">
+          {{if .ErrorMsg.Error01}}
+          <div class="error">Pflichtfeld!</div>
+          {{else}}
+          <div class= "noError"></div>
+          {{end}}
+        </div>
+      </div>
+      <div class="newCardFormContainer">
+        <label for="description" class="miscDataLabel">Beschreibung</label>
+        <textarea id="text" name="description" cols="50" rows="8">{{.ActiveCardbox.Description}}</textarea>
+      </div>
+      <div class="newCardFormContainer">
+
+        <label for="visibility" class="miscDataLabel">Sichtbar</label>
+        <div class="newCardRadio">
+          <input type="radio" name="visibility" value="Public" >
+        </div>
+        <div class="newCardRadioLabel">
+          <label for="public">Öffentlich</label>
+        </div>
+        <div class="newCardRadio">
+          <input type="radio" name="visibility" value="Private" checked>
+        </div>
+        <div class="newCardRadioLabel">
+          <label for="private">Privat</label>
+        </div>
+      </div>
+      <div class="newCardFormContainer" id="saveAndCont">
+        <input type="submit" class="yellowButton" value="Speichern und weiter">
+      </div>
+    </form>
+  </div>
+</div>
+{{template "footer"}}
+
+{{else}}
+{{template "header" .}}
+
+{{template "navigation_loggedin" .}}
+<div class="pageName">
+  Kartei erstellen / Kartei bearbeiten
+</div>
+
+<div class="pageDescriptionSearch">
+  <p>Hier kannst du eine neue Kartei erstellen oder eine vorhandene nach Bedarf bearbeiten.</p>
+</div>
+<div class="boxContainer miscData">
+  <div class="stdTitle">Allgemeine Daten</div>
+  <div class="newCardForm">
+    <form action="/submit-cardbox" method="post">
+      <div class="newCardFormContainer">
+        <label for="cardTitle" class="miscDataLabel">Titel</label>
+        <div class="newCardForm">
+          <input type="text" placeholder="" name="cardTitle">
+        </div>
+      </div>
+      <div class="newCardFormContainer">
+        <label for="category" class="miscDataLabel">Kategorie</label>
+        <div class="newCardForm DDArrow">
+          <select name="category" class="categoriesDD">
+            <option value="empty"></option>
+            <optgroup label="Naturwissenschaften">
+              <option value="Naturwissenschaften-Biologie">Biologie</option>
+              <option value="Naturwissenschaften-Chemie">Chemie</option>
+              <option value="Naturwissenschaften-Elektrotechnik">Elektrotechnik</option>
+              <option value="Naturwissenschaften-Informatik">Informatik</option>
+              <option value="Naturwissenschaften-Mathematik">Mathematik</option>
+              <option value="Naturwissenschaften-Medizin">Medizin</option>
+              <option value="Naturwissenschaften-Naturkunde">Naturkunde</option>
+              <option value="Naturwissenschaften-Physik">Physik</option>
+              <option value="Naturwissenschaften-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Sprachen">
+              <option value="Sprachen-Chinesisch">Chinesisch</option>
+              <option value="Sprachen-Deutsch">Deutsch</option>
+              <option value="Sprachen-Französisch">Französisch</option>
+              <option value="Sprachen-Griechisch">Griechisch</option>
+              <option value="Sprachen-Italienisch">Italienisch</option>
+              <option value="Sprachen-Latein">Latein</option>
+              <option value="Sprachen-Russisch">Russisch</option>
+              <option value="Sprachen-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Gesellschaft">
+              <option value="Gesellschaft-Ethik">Ethik</option>
+              <option value="Gesellschaft-eschichte">Geschichte</option>
+              <option value="Gesellschaft-Literatur">Literatur</option>
+              <option value="Gesellschaft-Musik">Musik</option>
+              <option value="Gesellschaft-Politik">Politik</option>
+              <option value="Gesellschaft-Recht">Recht</option>
+              <option value="Gesellschaft-Soziales">Soziales</option>
+              <option value="Gesellschaft-Sport">Sport</option>
+              <option value="Gesellschaft-Verkehrskunde">Verkehrskunde</option>
+              <option value="Gesellschaft-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Wirtschaft">
+              <option value="Wirtschaft-BWL">BWL</option>
+              <option value="Wirtschaft-Finanzen">Finanzen</option>
+              <option value="Wirtschaft-Landwirtschaft">Landwirtschaft</option>
+              <option value="Wirtschaft-Marketing">Marketing</option>
+              <option value="Wirtschaft-VWL">VWL</option>
+              <option value="Wirtschaft-Sonstiges">Sonstiges</option>
+            </optgroup>
+            <optgroup label="Geisteswissenschaften-">
+              <option value="Geisteswissenschaften-Kriminologie">Kriminologie</option>
+              <option value="Geisteswissenschaften-Philosophie">Philosophie</option>
+              <option value="Geisteswissenschaften-Psychologie">Psychologie</option>
+              <option value="Geisteswissenschaften-Pädagogik">Pädagogik</option>
+              <option value="Geisteswissenschaften-Theologie">Theologie</option>
+              <option value="Geisteswissenschaften-Sonstiges">Sonstiges</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="shortError">
+          {{if .ErrorMsg.Error01}}
+          <div class="error">Pflichtfeld!</div>
+          {{else}}
+          <div class= "noError"></div>
+          {{end}}
+        </div>
+      </div>
+      <div class="newCardFormContainer">
+        <label for="description" class="miscDataLabel">Beschreibung</label>
+        <textarea id="text" name="description" cols="50" rows="8"></textarea>
+      </div>
+      <div class="newCardFormContainer">
+
+        <label for="visibility" class="miscDataLabel">Sichtbar</label>
+        <div class="newCardRadio">
+          <input type="radio" name="visibility" value="Public" checked>
+        </div>
+        <div class="newCardRadioLabel">
+          <label for="public">Öffentlich</label>
+        </div>
+        <div class="newCardRadio">
+          <input type="radio" name="visibility" value="Private">
+        </div>
+        <div class="newCardRadioLabel">
+          <label for="private">Privat</label>
+        </div>
+      </div>
+      <div class="newCardFormContainer" id="saveAndCont">
+        <input type="submit" class="yellowButton" value="Speichern und weiter">
+      </div>
+    </form>
+  </div>
+</div>
+{{template "footer"}}
+{{end}}

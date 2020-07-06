@@ -1,0 +1,109 @@
+{{template "header" .}}
+
+{{template "navigation_loggedin" .}}
+<div class="pageName">
+  Mein Profil
+</div>
+
+<div class="pageDescriptionSearch">
+  <p>Hier kannst du deine Profildaten aktualisieren oder ändern.</p>
+</div>
+<form enctype="multipart/form-data" action="/update-profile" method="post">
+  <div class="profwind">
+
+    <div class="left">
+      <div class="nameCard">
+        <img src="/public/docs/{{.Userinfo.PicID}}">
+        <label for="file-upload" class="custom-file-upload">
+          Edit
+        </label>
+        <input id="file-upload" type="file" name="profilePic" accept="image/jpeg,image/png"/>
+        <h1>
+          {{.Userinfo.Username}}</h1>
+        <h2>{{.Userinfo.Email}}</h2>
+      </div>
+      <div class="statistics">
+        <h1>Statistik</h1>
+        <table>
+          <tr>
+            <td>Erstellte Karten:</td>
+            <td style="font-weight:bold;">{{.Userinfo.Cardnum}}</td>
+          </tr>
+          <tr>
+            <td>Erstellte Karteien:</td>
+            <td style="font-weight:bold;">{{.Userinfo.Boxnum}}</td>
+          </tr>
+          <tr>
+            <td>Mitglied seit:</td>
+            <td style="font-weight:bold;">{{.Userinfo.Date}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="right">
+      <div class="stdTitle">Update der Profildaten</div>
+      <div class="profupdate">
+        <div class="profupdateRow" id="newMail">
+          <label for="newMail" class="miscDataLabel">Neue E-Mail</label>
+          <div class="newCardForm">
+            <input type="text" placeholder="" name="newMail">
+          </div>
+          {{if .ErrorMsg.Error01}}
+            <div class="shortError">
+              <div class="error1">Diese Mail ist bereits vergeben!</div>
+            </div>
+          {{else}}
+            <div class="noError"></div>
+          {{end}}
+        </div>
+        <div class="profupdateRow">
+          <label for="oldPW" class="miscDataLabel">Altes Passwort</label>
+          <div class="newCardForm">
+            <input type="password" placeholder="" name="oldPW">
+          </div>
+        </div>
+        <div class="profupdateRow">
+          <label for="newPW" class="miscDataLabel">Neues Passwort</label>
+          <div class="newCardForm">
+            <input type="password" placeholder="" name="newPW">
+          </div>
+          {{if .ErrorMsg.Error02}}
+            <div class="shortError">
+              <div class="error1">Altes Passwort darf nicht mit dem neuen übereinstimmen!</div>
+            </div>
+          {{else}}
+            <div class="noError"></div>
+          {{end}}
+        </div>
+        <div class="profupdateRow">
+          <label for="confirmPW" class="miscDataLabel">Passwort wiederholen</label>
+          <div class="newCardForm">
+            <input type="password" placeholder="" name="confirmPW">
+          </div>
+        </div>
+        <div class="profupdateRow" id="saveOrDelete">
+          <button type="submit" class="yellowButton">Speichern</button>
+          <div class="yellowButton redButton" id="delete" onclick="on(`overlay`)"><img src="/public/img/Delete.svg"></div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<div id="overlay">
+  <div class="delBox">
+    <div class="pageName">
+      Löschen
+    </div>
+
+    <div class="pageDescriptionSearch">
+      <p>Bist du sicher, dass du dein Profil löschen möchtest?</p>
+    </div>
+    <div class="profupdateRow" id="keepOrDelete">
+      <a class="yellowButton greenButtonText" onclick="off(`overlay`)">Profil behalten</a>
+      <a href="/delete-user" class="yellowButton redButton" id="delete" method="GET">Profil löschen</a>
+    </div>
+  </div>
+</div>
+{{template "footer"}}
